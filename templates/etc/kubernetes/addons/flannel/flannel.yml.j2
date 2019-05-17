@@ -274,11 +274,11 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-        volumeMounts:
-          - name: run
-            mountPath: /run/flannel
-          - name: flannel-cfg
-            mountPath: /etc/kube-flannel/
+          volumeMounts:
+            - name: run
+              mountPath: /run/flannel
+            - name: flannel-cfg
+              mountPath: /etc/kube-flannel/
       volumes:
         - name: run
           hostPath:
@@ -354,11 +354,11 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-        volumeMounts:
-          - name: run
-            mountPath: /run/flannel
-          - name: flannel-cfg
-            mountPath: /etc/kube-flannel/
+          volumeMounts:
+            - name: run
+              mountPath: /run/flannel
+            - name: flannel-cfg
+              mountPath: /etc/kube-flannel/
       volumes:
         - name: run
           hostPath:
