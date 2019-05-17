@@ -1,8 +1,25 @@
 ---
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 apiVersion: extensions/v1beta1
 kind: PodSecurityPolicy
 metadata:
   name: psp.flannel.unprivileged
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: docker/default
     seccomp.security.alpha.kubernetes.io/defaultProfileName: docker/default
@@ -50,6 +67,8 @@ kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: flannel
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
 rules:
   - apiGroups: ['extensions']
     resources: ['podsecuritypolicies']
@@ -79,6 +98,8 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: flannel
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -93,6 +114,8 @@ kind: ServiceAccount
 metadata:
   name: flannel
   namespace: kube-system
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
 ---
 kind: ConfigMap
 apiVersion: v1
@@ -100,8 +123,7 @@ metadata:
   name: kube-flannel-cfg
   namespace: kube-system
   labels:
-    tier: node
-    app: flannel
+    addonmanager.kubernetes.io/mode: Reconcile
 data:
   cni-conf.json: |
     {
@@ -136,14 +158,16 @@ metadata:
   name: kube-flannel-ds-amd64
   namespace: kube-system
   labels:
-    tier: node
-    app: flannel
+    app.kubernetes.io/name: kube-flannel-ds-amd64
+    app.kubernetes.io/part-of: kube-system
+    addonmanager.kubernetes.io/mode: Reconcile
 spec:
   template:
     metadata:
       labels:
-        tier: node
-        app: flannel
+        app.kubernetes.io/name: kube-flannel-ds-amd64
+        app.kubernetes.io/part-of: kube-system
+        addonmanager.kubernetes.io/mode: Reconcile
     spec:
       hostNetwork: true
       nodeSelector:
@@ -216,14 +240,16 @@ metadata:
   name: kube-flannel-ds-arm64
   namespace: kube-system
   labels:
-    tier: node
-    app: flannel
+    app.kubernetes.io/name: kube-flannel-ds-arm64
+    app.kubernetes.io/part-of: kube-system
+    addonmanager.kubernetes.io/mode: Reconcile
 spec:
   template:
     metadata:
       labels:
-        tier: node
-        app: flannel
+        app.kubernetes.io/name: kube-flannel-ds-arm64
+        app.kubernetes.io/part-of: kube-system
+        addonmanager.kubernetes.io/mode: Reconcile
     spec:
       hostNetwork: true
       nodeSelector:
@@ -296,14 +322,16 @@ metadata:
   name: kube-flannel-ds-arm
   namespace: kube-system
   labels:
-    tier: node
-    app: flannel
+    app.kubernetes.io/name: kube-flannel-ds-arm
+    app.kubernetes.io/part-of: kube-system
+    addonmanager.kubernetes.io/mode: Reconcile
 spec:
   template:
     metadata:
       labels:
-        tier: node
-        app: flannel
+        app.kubernetes.io/name: kube-flannel-ds-arm
+        app.kubernetes.io/part-of: kube-system
+        addonmanager.kubernetes.io/mode: Reconcile
     spec:
       hostNetwork: true
       nodeSelector:
@@ -376,14 +404,16 @@ metadata:
   name: kube-flannel-ds-ppc64le
   namespace: kube-system
   labels:
-    tier: node
-    app: flannel
+    app.kubernetes.io/name: kube-flannel-ds-ppc64le
+    app.kubernetes.io/part-of: kube-system
+    addonmanager.kubernetes.io/mode: Reconcile
 spec:
   template:
     metadata:
       labels:
-        tier: node
-        app: flannel
+        app.kubernetes.io/name: kube-flannel-ds-ppc64le
+        app.kubernetes.io/part-of: kube-system
+        addonmanager.kubernetes.io/mode: Reconcile
     spec:
       hostNetwork: true
       nodeSelector:
@@ -456,14 +486,16 @@ metadata:
   name: kube-flannel-ds-s390x
   namespace: kube-system
   labels:
-    tier: node
-    app: flannel
+    app.kubernetes.io/name: kube-flannel-ds-s390x
+    app.kubernetes.io/part-of: kube-system
+    addonmanager.kubernetes.io/mode: Reconcile
 spec:
   template:
     metadata:
       labels:
-        tier: node
-        app: flannel
+        app.kubernetes.io/name: kube-flannel-ds-s390x
+        app.kubernetes.io/part-of: kube-system
+        addonmanager.kubernetes.io/mode: Reconcile
     spec:
       hostNetwork: true
       nodeSelector:

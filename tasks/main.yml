@@ -53,8 +53,7 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   with_items:
-    - { dest: "/etc/kubernetes/addons/flannel" }
-  when: inventory_hostname == ansible_play_hosts[0]
+    - { dest: "/etc/kubernetes/addons" }
   tags: kubernetes_flannel
 
 - name: copy templates
@@ -65,8 +64,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   with_items:
-    - { dest: "/etc/kubernetes/addons/flannel/flannel.yml" }
-  when: inventory_hostname == ansible_play_hosts[0]
+    - { dest: "/etc/kubernetes/addons/flannel.yml" }
   tags: kubernetes_flannel
 
 - name: prepare files
@@ -77,8 +75,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   with_items:
-    - { dest: "/etc/kubernetes/addons/flannel/flannel.yml" }
-  when: inventory_hostname == ansible_play_hosts[0]
+    - { dest: "/etc/kubernetes/addons/flannel.yml" }
   tags: kubernetes_flannel
 
 - name: apply manifests
@@ -86,6 +83,6 @@
     src: "{{ item.src }}"
     state: "{{ item.state }}"
   with_items:
-    - { state: "present", src: "/etc/kubernetes/addons/flannel/flannel.yml" }
+    - { state: "present", src: "/etc/kubernetes/addons/flannel.yml" }
   when: inventory_hostname == ansible_play_hosts[0]
   tags: kubernetes_flannel
