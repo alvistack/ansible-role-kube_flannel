@@ -19,6 +19,8 @@ kind: PodSecurityPolicy
 metadata:
   name: psp.flannel.unprivileged
   labels:
+    app.kubernetes.io/name: flannel
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: docker/default
@@ -69,6 +71,8 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: flannel
   labels:
+    app.kubernetes.io/name: flannel
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
 rules:
   - apiGroups: ['extensions']
@@ -101,6 +105,8 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: flannel
   labels:
+    app.kubernetes.io/name: flannel
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: EnsureExists
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -118,6 +124,8 @@ metadata:
   name: flannel
   namespace: kube-system
   labels:
+    app.kubernetes.io/name: flannel
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
 
 ---
@@ -127,6 +135,8 @@ metadata:
   name: kube-flannel-cfg
   namespace: kube-system
   labels:
+    app.kubernetes.io/name: flannel
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
 data:
   cni-conf.json: |
@@ -163,14 +173,14 @@ metadata:
   name: kube-flannel-ds-amd64
   namespace: kube-system
   labels:
-    app.kubernetes.io/name: kube-flannel-ds-amd64
+    app.kubernetes.io/name: flannel
     app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: kube-flannel-ds-amd64
+        app.kubernetes.io/name: flannel
         app.kubernetes.io/part-of: kube-system
         addonmanager.kubernetes.io/mode: Reconcile
     spec:
