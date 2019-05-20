@@ -23,10 +23,11 @@
         - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
+        - "main.yml"
       paths: "../vars"
-      skip: true
   loop_control:
     loop_var: "loop_var"
+  ignore_errors: true
   tags: kubernetes_flannel
 
 - name: include release specific tasks
@@ -39,9 +40,9 @@
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths: "."
-      skip: true
   loop_control:
     loop_var: "loop_var"
+  ignore_errors: true
   tags: kubernetes_flannel
 
 - name: prepare directories
@@ -52,8 +53,7 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   with_items:
-    - { dest: "/etc/kubernetes/addons/flannel" }
-  when: inventory_hostname == ansible_play_hosts[0]
+    - { dest: "/etc/kubernetes/addons" }
   tags: kubernetes_flannel
 
 - name: copy templates
@@ -64,8 +64,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   with_items:
-    - { dest: "/etc/kubernetes/addons/flannel/kube-flannel.yml" }
-  when: inventory_hostname == ansible_play_hosts[0]
+    - { dest: "/etc/kubernetes/addons/flannel.yml" }
   tags: kubernetes_flannel
 
 - name: prepare files
@@ -76,8 +75,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   with_items:
-    - { dest: "/etc/kubernetes/addons/flannel/kube-flannel.yml" }
-  when: inventory_hostname == ansible_play_hosts[0]
+    - { dest: "/etc/kubernetes/addons/flannel.yml" }
   tags: kubernetes_flannel
 
 - name: apply manifests
@@ -85,6 +83,6 @@
     src: "{{ item.src }}"
     state: "{{ item.state }}"
   with_items:
-    - { state: "present", src: "/etc/kubernetes/addons/flannel/kube-flannel.yml" }
+    - { state: "present", src: "/etc/kubernetes/addons/flannel.yml" }
   when: inventory_hostname == ansible_play_hosts[0]
   tags: kubernetes_flannel
