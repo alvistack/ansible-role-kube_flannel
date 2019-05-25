@@ -84,5 +84,5 @@
     state: "{{ item.state }}"
   with_items:
     - { state: "present", src: "/etc/kubernetes/addons/flannel.yml" }
-  when: inventory_hostname == ansible_play_hosts[0]
+  when: ansible_hostname == ansible_play_hosts[0]
   tags: kubernetes_flannel
