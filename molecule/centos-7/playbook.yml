@@ -15,8 +15,8 @@
 # limitations under the License.
 
 - hosts: all
-  become: true
   remote_user: root
+  become: true
   roles:
     - role: bootstrap
     - role: python
@@ -25,8 +25,8 @@
     - role: kubectl
 
 - hosts: kube-master
-  become: true
   remote_user: root
+  become: true
   roles:
     - role: minikube
     - role: kubernetes-addon-manager
