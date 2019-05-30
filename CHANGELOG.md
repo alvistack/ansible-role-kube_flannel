@@ -7,6 +7,7 @@
   - Always include default variables from `vars/main.yml`
   - Always use `become: true` with molecule, especially for vagrant
   - Replace `inventory_hostname` with `ansible_hostname`
+  - Abstract `cni-conf.json` and `net-conf.json` with `to_nice_json()`
 
 ## 3.0.0 - 2019-05-20
 

@@ -25,3 +25,21 @@ flannel_pod_subnet: "10.233.64.0/18"
 
 # Choose what type of flannel backend to use
 flannel_backend_type: "vxlan"
+
+# Flannel cni-conf.json
+flannel_cni_conf:
+  name: "cbr0"
+  plugins:
+    - type: "flannel"
+      delegate:
+        hairpinMode: true
+        isDefaultGateway: true
+    - type: "portmap"
+      capabilities:
+        portMappings: true
+
+# Flannel net-conf.json
+flannel_net_conf:
+  Network: "{{ flannel_pod_subnet }}"
+  Backend:
+    Type: "{{ flannel_backend_type }}"
