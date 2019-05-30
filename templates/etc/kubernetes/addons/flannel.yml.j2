@@ -140,31 +140,13 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 data:
   cni-conf.json: |
-    {
-      "name": "cbr0",
-      "plugins": [
-        {
-          "type": "flannel",
-          "delegate": {
-            "hairpinMode": true,
-            "isDefaultGateway": true
-          }
-        },
-        {
-          "type": "portmap",
-          "capabilities": {
-            "portMappings": true
-          }
-        }
-      ]
-    }
+{% if flannel_cni_conf %}
+    {{ flannel_cni_conf | to_nice_json(indent=4) | indent(4) }}
+{% endif %}
   net-conf.json: |
-    {
-      "Network": "{{ flannel_pod_subnet }}",
-      "Backend": {
-        "Type": "{{ flannel_backend_type }}"
-      }
-    }
+{% if flannel_net_conf %}
+    {{ flannel_net_conf | to_nice_json(indent=4) | indent(4) }}
+{% endif %}
 
 ---
 apiVersion: extensions/v1beta1
