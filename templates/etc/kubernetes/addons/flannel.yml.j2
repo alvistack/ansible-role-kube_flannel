@@ -109,9 +109,9 @@ metadata:
     app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: EnsureExists
 roleRef:
-  apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: flannel
+  apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: ServiceAccount
     name: flannel
