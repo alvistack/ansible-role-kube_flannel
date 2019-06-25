@@ -66,8 +66,8 @@ spec:
     rule: 'RunAsAny'
 
 ---
-kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
 metadata:
   name: flannel
   labels:
@@ -100,8 +100,8 @@ rules:
       - patch
 
 ---
-kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
 metadata:
   name: flannel
   labels:
@@ -129,8 +129,8 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 
 ---
-kind: ConfigMap
 apiVersion: v1
+kind: ConfigMap
 metadata:
   name: kube-flannel-cfg
   namespace: kube-system
