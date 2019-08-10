@@ -167,6 +167,7 @@ spec:
         addonmanager.kubernetes.io/mode: Reconcile
     spec:
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       tolerations:
         - operator: Exists
           effect: NoSchedule
