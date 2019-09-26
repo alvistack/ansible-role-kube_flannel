@@ -159,6 +159,11 @@ metadata:
     app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flannel
+      app.kubernetes.io/part-of: kube-system
+      addonmanager.kubernetes.io/mode: Reconcile
   template:
     metadata:
       labels:
