@@ -54,10 +54,6 @@
   src: https://github.com/alvistack/ansible-role-kubernetes-cni
   version: develop
 
-- name: kubernetes-weave
-  src: https://github.com/alvistack/ansible-role-kubernetes-weave
-  version: develop
-
 - name: python
   src: https://github.com/alvistack/ansible-role-python
   version: develop
