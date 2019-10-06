@@ -20,7 +20,7 @@ driver:
     name: virtualbox
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    box: generic/rhel7
+    box: generic/ubuntu1804
     cpu: 2
     memory: 4096
     interfaces:
@@ -35,7 +35,7 @@ platforms:
     groups:
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-2
-    box: generic/rhel7
+    box: generic/ubuntu1804
     cpu: 2
     memory: 4096
     interfaces:
@@ -50,7 +50,7 @@ platforms:
     groups:
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-3
-    box: generic/rhel7
+    box: generic/ubuntu1804
     cpu: 2
     memory: 4096
     interfaces:
@@ -65,7 +65,7 @@ platforms:
     groups:
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-4
-    box: generic/rhel7
+    box: generic/ubuntu1804
     cpu: 2
     memory: 4096
     interfaces:
