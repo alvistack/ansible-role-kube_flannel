@@ -29,6 +29,7 @@ flannel_backend_type: "vxlan"
 # Flannel cni-conf.json
 flannel_cni_conf:
   name: "cbr0"
+  cniVersion: "0.2.0"
   plugins:
     - type: "flannel"
       delegate:
