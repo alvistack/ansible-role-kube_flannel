@@ -57,7 +57,6 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/kubernetes/addons" }
-  when: ansible_hostname == ansible_play_hosts[0]
   tags: kubernetes_flannel
 
 - name: copy templates
@@ -69,7 +68,6 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/kubernetes/addons/flannel.yml" }
-  when: ansible_hostname == ansible_play_hosts[0]
   tags: kubernetes_flannel
 
 - name: prepare files
@@ -81,5 +79,4 @@
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "/etc/kubernetes/addons/flannel.yml" }
-  when: ansible_hostname == ansible_play_hosts[0]
   tags: kubernetes_flannel
