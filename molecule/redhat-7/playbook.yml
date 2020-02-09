@@ -32,6 +32,7 @@
       kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
     - role: kubernetes-addon-manager
     - role: kubernetes-flannel
+      flannel_iface: "eth1"
 
   post_tasks:
     - name: kubectl version
