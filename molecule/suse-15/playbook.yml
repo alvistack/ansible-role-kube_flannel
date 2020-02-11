@@ -24,7 +24,7 @@
     - role: kubernetes-cni
     - role: kubectl
 
-- hosts: kube-master
+- hosts: all
   remote_user: root
   become: true
   roles:
