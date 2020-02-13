@@ -1,12 +1,17 @@
 # Ansible Role for Flannel on Kubernetes
 
-## 4.2.0 - TBC
+## 4.3.0 - TBC
+
+### Major Changes
+
+## 4.2.0 - 2020-02-13
 
 ### Major Changes
 
   - Migrate molecule driver to Libvirt
   - Migrate molecule verifier to Ansible
   - Support Ubuntu 19.10
+  - Bugfix multiple interface on Vagrant with `--iface`
 
 ## 4.1.0 - 2020-01-16
 
