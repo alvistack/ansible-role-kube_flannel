@@ -23,21 +23,8 @@
     - role: docker
     - role: kubernetes-cni
     - role: kubectl
-
-- hosts: all
-  remote_user: root
-  become: true
-  roles:
     - role: minikube
       kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
     - role: kubernetes-addon-manager
     - role: kubernetes-flannel
       flannel_iface: "eth1"
-
-  post_tasks:
-    - name: kubectl version
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      command: kubectl version
-      register: result
-      changed_when: result is not succeeded
