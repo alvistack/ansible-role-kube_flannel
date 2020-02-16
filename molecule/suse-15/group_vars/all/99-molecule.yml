@@ -14,15 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: all
-  remote_user: root
-  become: true
-  roles:
-    - role: bootstrap
-    - role: python
-    - role: docker
-    - role: kubernetes_cni
-    - role: kubectl
-    - role: minikube
-    - role: kubernetes_addon_manager
-    - role: kubernetes_flannel
+kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
+
+flannel_iface: "eth1"

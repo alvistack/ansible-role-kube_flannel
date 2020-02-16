@@ -24,7 +24,5 @@
     - role: kubernetes_cni
     - role: kubectl
     - role: minikube
-      kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
     - role: kubernetes_addon_manager
     - role: kubernetes_flannel
-      flannel_iface: "eth1"
