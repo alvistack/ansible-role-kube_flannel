@@ -21,7 +21,7 @@
     - role: bootstrap
     - role: python
     - role: docker
-    - role: kubernetes_cni
+    - role: cni_plugins
     - role: kubectl
     - role: minikube
     - role: kubernetes_addon_manager
