@@ -17,12 +17,27 @@
 - hosts: all
   remote_user: root
   become: true
-  roles:
-    - role: bootstrap
-    - role: python
-    - role: docker
-    - role: cni_plugins
-    - role: kubectl
-    - role: minikube
-    - role: kubernetes_addon_manager
-    - role: kubernetes_flannel
+  tasks:
+    - include_role:
+        name: bootstrap
+
+    - include_role:
+        name: python
+
+    - include_role:
+        name: docker
+
+    - include_role:
+        name: cni_plugins
+
+    - include_role:
+        name: kubectl
+
+    - include_role:
+        name: minikube
+
+    - include_role:
+        name: kubernetes_addon_manager
+
+    - include_role:
+        name: kubernetes_flannel
