@@ -18,26 +18,54 @@
   src: https://github.com/alvistack/ansible-role-bootstrap
   version: develop
 
-- name: docker
-  src: https://github.com/alvistack/ansible-role-docker
+- name: python
+  src: https://github.com/alvistack/ansible-role-python
   version: develop
 
 - name: cni_plugins
   src: https://github.com/alvistack/ansible-role-cni_plugins
   version: develop
 
+- name: cri_tools
+  src: https://github.com/alvistack/ansible-role-cri_tools
+  version: develop
+
+- name: containers_common
+  src: https://github.com/alvistack/ansible-role-containers_common
+  version: develop
+
+- name: runc
+  src: https://github.com/alvistack/ansible-role-runc
+  version: develop
+
+- name: conmon
+  src: https://github.com/alvistack/ansible-role-conmon
+  version: develop
+
+- name: cri_o
+  src: https://github.com/alvistack/ansible-role-cri_o
+  version: develop
+
 - name: kubectl
   src: https://github.com/alvistack/ansible-role-kubectl
   version: develop
 
+- name: kubelet
+  src: https://github.com/alvistack/ansible-role-kubelet
+  version: develop
+
+- name: kubeadm
+  src: https://github.com/alvistack/ansible-role-kubeadm
+  version: develop
+
+- name: etcd
+  src: https://github.com/alvistack/ansible-role-etcd
+  version: develop
+
+- name: kube_master
+  src: https://github.com/alvistack/ansible-role-kube_master
+  version: develop
+
 - name: kubernetes_addon_manager
   src: https://github.com/alvistack/ansible-role-kubernetes_addon_manager
-  version: develop
-
-- name: minikube
-  src: https://github.com/alvistack/ansible-role-minikube
-  version: develop
-
-- name: python
-  src: https://github.com/alvistack/ansible-role-python
   version: develop

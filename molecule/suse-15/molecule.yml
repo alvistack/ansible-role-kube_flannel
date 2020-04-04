@@ -32,6 +32,9 @@ platforms:
       - 'disk_bus = "sata"'
       - 'volume_cache = "none"'
       - 'storage :file, bus: "sata", cache: "none"'
+    groups:
+      - etcd
+      - kube_master
 lint: |
   set -ex
   yamllint .
