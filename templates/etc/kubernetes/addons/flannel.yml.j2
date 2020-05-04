@@ -77,13 +77,13 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 data:
   cni-conf.json: |
-{% if flannel_cni_conf %}
+{% if flannel_cni_conf -%}
     {{ flannel_cni_conf | to_nice_json(indent=4) | indent(4) }}
-{% endif -%}
+{%- endif %}
   net-conf.json: |
-{% if flannel_net_conf %}
+{% if flannel_net_conf -%}
     {{ flannel_net_conf | to_nice_json(indent=4) | indent(4) }}
-{% endif -%}
+{%- endif %}
 
 ---
 apiVersion: v1
