@@ -16,7 +16,6 @@
 
 - name: include default variables
   include_vars: "../vars/main.yml"
-  tags: kubernetes_flannel
 
 - name: include release specific variables
   include_vars: "{{ lookup('first_found', _params) }}"
@@ -31,7 +30,6 @@
       paths:
         - "../vars"
   ignore_errors: true
-  tags: kubernetes_flannel
 
 - name: include release specific tasks
   include_tasks: "{{ lookup('first_found', _params) }}"
@@ -46,7 +44,6 @@
       paths:
         - "."
   ignore_errors: true
-  tags: kubernetes_flannel
 
 - name: prepare directories
   file:
@@ -57,7 +54,6 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/kubernetes/addons" }
-  tags: kubernetes_flannel
 
 - name: copy templates
   template:
@@ -68,7 +64,6 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/kubernetes/addons/flannel.yml" }
-  tags: kubernetes_flannel
 
 - name: prepare files
   file:
@@ -79,4 +74,3 @@
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "/etc/kubernetes/addons/flannel.yml" }
-  tags: kubernetes_flannel
