@@ -1,6 +1,6 @@
 # Ansible Role for Flannel on Kubernetes
 
-[![Travis](https://img.shields.io/travis/com/alvistack/ansible-role-kubernetes_flannel.svg)](https://travis-ci.com/alvistack/ansible-role-kubernetes_flannel)
+[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-kubernetes_flannel/master)](https://gitlab.com/alvistack/ansible-role-kubernetes_flannel/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-kubernetes_flannel.svg)](https://github.com/alvistack/ansible-role-kubernetes_flannel/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-kubernetes_flannel.svg)](https://github.com/alvistack/ansible-role-kubernetes_flannel/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.kubernetes_flannel-blue.svg)](https://galaxy.ansible.com/alvistack/kubernetes_flannel)
