@@ -193,6 +193,7 @@ spec:
       initContainers:
         - name: install-cni
           image: {{ flannel_image_repository }}/flannel:{{ flannel_version }}-amd64
+          imagePullPolicy: IfNotPresent
           command:
             - cp
           args:
@@ -207,6 +208,7 @@ spec:
       containers:
         - name: kube-flannel
           image: {{ flannel_image_repository }}/flannel:{{ flannel_version }}-amd64
+          imagePullPolicy: IfNotPresent
           command:
             - /opt/bin/flanneld
           args:
