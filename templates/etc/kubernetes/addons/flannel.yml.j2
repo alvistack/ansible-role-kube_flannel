@@ -152,7 +152,7 @@ roleRef:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: kube-flannel-ds-amd64
+  name: kube-flannel-ds
   namespace: kube-system
   labels:
     app.kubernetes.io/name: flannel
@@ -192,7 +192,7 @@ spec:
       serviceAccountName: flannel
       initContainers:
         - name: install-cni
-          image: {{ flannel_image_repository }}/flannel:{{ flannel_version }}-amd64
+          image: {{ flannel_image_repository }}/flannel:{{ flannel_version }}
           imagePullPolicy: IfNotPresent
           command:
             - cp
@@ -207,7 +207,7 @@ spec:
               mountPath: /etc/kube-flannel/
       containers:
         - name: kube-flannel
-          image: {{ flannel_image_repository }}/flannel:{{ flannel_version }}-amd64
+          image: {{ flannel_image_repository }}/flannel:{{ flannel_version }}
           imagePullPolicy: IfNotPresent
           command:
             - /opt/bin/flanneld
