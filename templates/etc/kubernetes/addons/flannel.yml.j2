@@ -50,7 +50,7 @@ spec:
   allowPrivilegeEscalation: false
   defaultAllowPrivilegeEscalation: false
   # Capabilities
-  allowedCapabilities: ['NET_ADMIN']
+  allowedCapabilities: ['NET_ADMIN', 'NET_RAW']
   defaultAddCapabilities: []
   requiredDropCapabilities: []
   # Host namespaces
@@ -62,39 +62,8 @@ spec:
       max: 65535
   # SELinux
   seLinux:
-    # SELinux is unsed in CaaSP
+    # SELinux is unused in CaaSP
     rule: 'RunAsAny'
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: kube-flannel-cfg
-  namespace: kube-system
-  labels:
-    app.kubernetes.io/name: flannel
-    app.kubernetes.io/part-of: kube-system
-    addonmanager.kubernetes.io/mode: Reconcile
-data:
-  cni-conf.json: |
-{% if flannel_cni_conf -%}
-    {{ flannel_cni_conf | to_nice_json(indent=4) | indent(4) }}
-{%- endif %}
-  net-conf.json: |
-{% if flannel_net_conf -%}
-    {{ flannel_net_conf | to_nice_json(indent=4) | indent(4) }}
-{%- endif %}
-
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: flannel
-  namespace: kube-system
-  labels:
-    app.kubernetes.io/name: flannel
-    app.kubernetes.io/part-of: kube-system
-    addonmanager.kubernetes.io/mode: Reconcile
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -149,6 +118,37 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flannel
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/name: flannel
+    app.kubernetes.io/part-of: kube-system
+    addonmanager.kubernetes.io/mode: Reconcile
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-flannel-cfg
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/name: flannel
+    app.kubernetes.io/part-of: kube-system
+    addonmanager.kubernetes.io/mode: Reconcile
+data:
+  cni-conf.json: |
+{% if flannel_cni_conf -%}
+    {{ flannel_cni_conf | to_nice_json(indent=4) | indent(4) }}
+{%- endif %}
+  net-conf.json: |
+{% if flannel_net_conf -%}
+    {{ flannel_net_conf | to_nice_json(indent=4) | indent(4) }}
+{%- endif %}
+
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -176,15 +176,12 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: beta.kubernetes.io/os
+                  - key: kubernetes.io/os
                     operator: In
                     values:
                       - linux
-                  - key: beta.kubernetes.io/arch
-                    operator: In
-                    values:
-                      - amd64
       hostNetwork: true
+      priorityClassName: system-node-critical
       dnsPolicy: ClusterFirstWithHostNet
       tolerations:
         - operator: Exists
@@ -225,7 +222,7 @@ spec:
           securityContext:
             privileged: false
             capabilities:
-               add: ["NET_ADMIN"]
+               add: ["NET_ADMIN", "NET_RAW"]
           env:
             - name: POD_NAME
               valueFrom:
