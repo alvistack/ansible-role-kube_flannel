@@ -33,7 +33,7 @@ platforms:
       - etcd
       - kube_master
 lint: |
-  set -euo pipefail
+  set -euxo pipefail
   yamllint .
   ansible-lint
   flake8
