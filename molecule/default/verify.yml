@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: all
+- hosts: kube_master
   remote_user: root
   become: true
   tasks:
@@ -24,3 +24,19 @@
       command: kubectl version
       register: result
       changed_when: result is not succeeded
+    
+    - name: kubectl get pod --all-namespaces
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      shell: |
+        set -euxo pipefail
+        kubectl get pod --all-namespaces | egrep -e 'kube-system\s+kube-flannel-ds-\S+\s+1\/1\s+Running'
+      args:
+        executable: "/bin/bash"
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60

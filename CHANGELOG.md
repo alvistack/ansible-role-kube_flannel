@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Simply Molecule with `alvistack/kubernetes-1.20`
   - Support Debian 11
   - Support openSUSE Leap 15.3
 
