@@ -59,7 +59,7 @@
 .script-bootstrap-ansible: &script-bootstrap-ansible
   - |
     if ! [[ -x "$(command -v ansible)" ]]; then
-      sudo -E pipx install --force --pip-args='--upgrade' --include-deps 'ansible>=4.0.0,<5.0.0'
+      sudo -E pipx install --force --pip-args='--upgrade' --include-deps 'ansible>=4.1.0,<5.0.0'
       sudo -E pipx inject --force --pip-args='--upgrade' --include-apps ansible ansible-lint
       sudo -E pipx inject --force --pip-args='--upgrade' ansible docker netaddr python-vagrant
     fi
@@ -114,109 +114,25 @@ default:
     - *script-git-submodule
     - *script-symlink-ansible-role
 
-build:ubuntu-20.04:
+build:kubernetes-1.20:
   <<: *job-molecule
   stage: build
   retry: 2
   variables:
-    _MOLECULE_SCENARIO_NAME: "ubuntu-20.04"
+    _MOLECULE_SCENARIO_NAME: "kubernetes-1.20"
 
-build:ubuntu-18.04:
+build:kubernetes-1.19:
   <<: *job-molecule
   stage: build
   retry: 2
   variables:
-    _MOLECULE_SCENARIO_NAME: "ubuntu-18.04"
+    _MOLECULE_SCENARIO_NAME: "kubernetes-1.19"
 
-test:ubuntu-21.04:
+test:kubernetes-1.21:
   <<: *job-molecule
   stage: test
   variables:
-    _MOLECULE_SCENARIO_NAME: "ubuntu-21.04"
-  allow_failure: true
-
-test:ubuntu-20.10:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "ubuntu-20.10"
-  allow_failure: true
-
-test:centos-8-stream:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "centos-8-stream"
-  allow_failure: true
-
-test:centos-7:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "centos-7"
-  allow_failure: true
-
-test:opensuse-tumbleweed:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "opensuse-tumbleweed"
-  allow_failure: true
-
-test:opensuse-leap-15.3:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "opensuse-leap-15.3"
-  allow_failure: true
-
-test:opensuse-leap-15.2:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "opensuse-leap-15.2"
-  allow_failure: true
-
-test:debian-11:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "debian-11"
-  allow_failure: true
-
-test:debian-10:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "debian-10"
-  allow_failure: true
-
-test:fedora-34:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "fedora-34"
-  allow_failure: true
-
-test:fedora-33:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "fedora-33"
-  allow_failure: true
-
-test:rhel-8:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "rhel-8"
-  allow_failure: true
-
-test:rhel-7:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "rhel-7"
+    _MOLECULE_SCENARIO_NAME: "kubernetes-1.21"
   allow_failure: true
 
 deploy:ansible-galaxy:
@@ -224,5 +140,5 @@ deploy:ansible-galaxy:
   stage: deploy
   retry: 2
   needs:
-    - build:ubuntu-20.04
-    - build:ubuntu-18.04
+    - build:kubernetes-1.20
+    - build:kubernetes-1.19

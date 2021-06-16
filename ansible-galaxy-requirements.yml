@@ -15,67 +15,11 @@
 # limitations under the License.
 
 collections:
-  - name: community.general
-    src: https://galaxy.ansible.com
-    version: ">=3.0.0,<4.0.0"
-
-  - name: community.kubernetes
-    src: https://galaxy.ansible.com
-    version: ">=1.0.0,<2.0.0"
-
-  - name: containers.podman
-    src: https://galaxy.ansible.com
-    version: ">=1.0.0,<2.0.0"
-
   - name: operator_sdk.util
     src: https://galaxy.ansible.com
     version: ">=0.0.0,<1.0.0"
 
 roles:
-  - name: cni_plugins
-    src: https://github.com/alvistack/ansible-role-cni_plugins
-    version: develop
-
-  - name: cri_tools
-    src: https://github.com/alvistack/ansible-role-cri_tools
-    version: develop
-
-  - name: containers_common
-    src: https://github.com/alvistack/ansible-role-containers_common
-    version: develop
-
-  - name: crun
-    src: https://github.com/alvistack/ansible-role-crun
-    version: develop
-
-  - name: conmon
-    src: https://github.com/alvistack/ansible-role-conmon
-    version: develop
-
-  - name: cri_o
-    src: https://github.com/alvistack/ansible-role-cri_o
-    version: develop
-
-  - name: kubectl
-    src: https://github.com/alvistack/ansible-role-kubectl
-    version: develop
-
-  - name: kubeadm
-    src: https://github.com/alvistack/ansible-role-kubeadm
-    version: develop
-
-  - name: kubelet
-    src: https://github.com/alvistack/ansible-role-kubelet
-    version: develop
-
-  - name: etcd
-    src: https://github.com/alvistack/ansible-role-etcd
-    version: develop
-
-  - name: kube_master
-    src: https://github.com/alvistack/ansible-role-kube_master
-    version: develop
-
   - name: kubernetes_addon_manager
     src: https://github.com/alvistack/ansible-role-kubernetes_addon_manager
     version: develop
