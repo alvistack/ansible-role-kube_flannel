@@ -185,7 +185,7 @@ spec:
       serviceAccountName: flannel
       initContainers:
         - name: install-cni
-          image: {{ flannel_image_repository }}/flannel:{{ flannel_version }}
+          image: quay.io/coreos/flannel:v0.14.0
           imagePullPolicy: IfNotPresent
           command:
             - cp
@@ -200,7 +200,7 @@ spec:
               mountPath: /etc/kube-flannel/
       containers:
         - name: kube-flannel
-          image: {{ flannel_image_repository }}/flannel:{{ flannel_version }}
+          image: quay.io/coreos/flannel:v0.14.0
           imagePullPolicy: IfNotPresent
           command:
             - /opt/bin/flanneld
