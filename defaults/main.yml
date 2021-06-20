@@ -14,12 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Flannel version.
-flannel_version: "v0.13.0"
-
-# ImageRepository sets the container registry to pull images from.
-flannel_image_repository: "quay.io/coreos"
-
 # Interface to use (IP or name) for inter-host communication.
 flannel_iface: "{{ ansible_default_ipv4.interface }}"
 
