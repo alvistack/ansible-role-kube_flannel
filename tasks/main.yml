@@ -71,7 +71,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/kubernetes/addons/flannel.yml" }
+    - { dest: "/etc/kubernetes/addons/10-flannel.yml" }
 
 - name: prepare files
   file:
@@ -81,4 +81,4 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/etc/kubernetes/addons/flannel.yml" }
+    - { dest: "/etc/kubernetes/addons/10-flannel.yml" }
