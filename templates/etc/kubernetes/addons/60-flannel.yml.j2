@@ -140,9 +140,9 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 data:
   cni-conf.json: |
-    {{ flannel_cni_conf | to_nice_json(indent=4) | indent(4) }}
+    {{ kube_flannel_cni_conf | to_nice_json(indent=4) | indent(4) }}
   net-conf.json: |
-    {{ flannel_net_conf | to_nice_json(indent=4) | indent(4) }}
+    {{ kube_flannel_net_conf | to_nice_json(indent=4) | indent(4) }}
 
 ---
 apiVersion: apps/v1
@@ -207,7 +207,7 @@ spec:
           args:
             - --ip-masq
             - --kube-subnet-mgr
-            - --iface={{ flannel_iface }}
+            - --iface={{ kube_flannel_iface }}
           resources:
             requests:
               cpu: "100m"

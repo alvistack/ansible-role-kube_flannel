@@ -15,16 +15,16 @@
 # limitations under the License.
 
 # Interface to use (IP or name) for inter-host communication.
-flannel_iface: "{{ ansible_default_ipv4.interface }}"
+kube_flannel_iface: "{{ ansible_default_ipv4.interface }}"
 
 # PodSubnet is the subnet used by pods.
-flannel_pod_subnet: "10.233.64.0/18"
+kube_flannel_pod_subnet: "10.233.64.0/18"
 
 # Choose what type of flannel backend to use
-flannel_backend_type: "vxlan"
+kube_flannel_backend_type: "vxlan"
 
 # Flannel cni-conf.json
-flannel_cni_conf:
+kube_flannel_cni_conf:
   name: "cbr0"
   cniVersion: "0.3.1"
   plugins:
@@ -37,7 +37,7 @@ flannel_cni_conf:
         portMappings: true
 
 # Flannel net-conf.json
-flannel_net_conf:
-  Network: "{{ flannel_pod_subnet }}"
+kube_flannel_net_conf:
+  Network: "{{ kube_flannel_pod_subnet }}"
   Backend:
-    Type: "{{ flannel_backend_type }}"
+    Type: "{{ kube_flannel_backend_type }}"
