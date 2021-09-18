@@ -128,6 +128,13 @@ test:kubernetes-1.21:
     _MOLECULE_SCENARIO_NAME: "kubernetes-1.21"
   allow_failure: true
 
+test:kubernetes-1.22:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "kubernetes-1.22"
+  allow_failure: true
+
 deploy:ansible-galaxy:
   <<: *job-ansible-galaxy
   stage: deploy
