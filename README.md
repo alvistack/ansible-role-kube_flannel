@@ -1,5 +1,7 @@
 # Ansible Role for Flannel on Kubernetes
 
+<img src="/alvistack.svg" width="75" alt="AlviStack">
+
 [![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-kube_flannel/master)](https://gitlab.com/alvistack/ansible-role-kube_flannel/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-kube_flannel.svg)](https://github.com/alvistack/ansible-role-kube_flannel/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-kube_flannel.svg)](https://github.com/alvistack/ansible-role-kube_flannel/blob/master/LICENSE)
