@@ -19,15 +19,11 @@
   become: true
   tasks:
     - name: kubectl version
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       command: kubectl version
       register: result
       changed_when: result is not succeeded
     
     - name: kubectl get pod --all-namespaces
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       shell: |
         set -euxo pipefail
         kubectl get pod --all-namespaces | egrep -e 'kube-system\s+kube-flannel-ds-\S+\s+[0-9]+\/[0-9]+\s+Running'
