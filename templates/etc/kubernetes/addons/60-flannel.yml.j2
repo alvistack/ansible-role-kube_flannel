@@ -184,8 +184,20 @@ spec:
           effect: NoSchedule
       serviceAccountName: flannel
       initContainers:
+        - name: install-cni-plugin
+          image: docker.io/rancher/mirrored-flannelcni-flannel-cni-plugin:v1.2
+          imagePullPolicy: IfNotPresent
+          command:
+            - cp
+          args:
+            - -f
+            - /flannel
+            - /opt/cni/bin/flannel
+          volumeMounts:
+            - name: cni-plugin
+              mountPath: /opt/cni/bin
         - name: install-cni
-          image: quay.io/coreos/flannel:v0.14.0
+          image: quay.io/coreos/flannel:v0.15.0
           imagePullPolicy: IfNotPresent
           command:
             - cp
@@ -197,10 +209,10 @@ spec:
             - name: cni
               mountPath: /etc/cni/net.d
             - name: flannel-cfg
-              mountPath: /etc/kube-flannel/
+              mountPath: /etc/kube-flannel
       containers:
         - name: kube-flannel
-          image: quay.io/coreos/flannel:v0.14.0
+          image: quay.io/coreos/flannel:v0.15.0
           imagePullPolicy: IfNotPresent
           command:
             - /opt/bin/flanneld
@@ -232,11 +244,14 @@ spec:
             - name: run
               mountPath: /run/flannel
             - name: flannel-cfg
-              mountPath: /etc/kube-flannel/
+              mountPath: /etc/kube-flannel
       volumes:
         - name: run
           hostPath:
             path: /run/flannel
+        - name: cni-plugin
+          hostPath:
+            path: /opt/cni/bin
         - name: cni
           hostPath:
             path: /etc/cni/net.d
