@@ -127,12 +127,11 @@ build:kubernetes-1.21:
   variables:
     _MOLECULE_SCENARIO_NAME: "kubernetes-1.21"
 
-test:kubernetes-1.22:
+build:kubernetes-1.22:
   <<: *job-molecule
-  stage: test
+  stage: build
   variables:
     _MOLECULE_SCENARIO_NAME: "kubernetes-1.22"
-  allow_failure: true
 
 test:kubernetes-1.23:
   <<: *job-molecule
@@ -148,3 +147,4 @@ deploy:ansible-galaxy:
   needs:
     - build:kubernetes-1.20
     - build:kubernetes-1.21
+    - build:kubernetes-1.22
