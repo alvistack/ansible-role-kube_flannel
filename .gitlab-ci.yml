@@ -113,13 +113,6 @@ default:
     - *script-git-submodule
     - *script-symlink-ansible-role
 
-build:kubernetes-1.20:
-  <<: *job-molecule
-  stage: build
-  retry: 2
-  variables:
-    _MOLECULE_SCENARIO_NAME: "kubernetes-1.20"
-
 build:kubernetes-1.21:
   <<: *job-molecule
   stage: build
@@ -145,6 +138,5 @@ deploy:ansible-galaxy:
   stage: deploy
   retry: 2
   needs:
-    - build:kubernetes-1.20
     - build:kubernetes-1.21
     - build:kubernetes-1.22
