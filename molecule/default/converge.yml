@@ -19,7 +19,7 @@
   become: true
   tasks:
     - name: kubectl get --raw='/readyz?verbose'
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         kubectl get --raw='/readyz?verbose' | grep 'check passed'
       args:
@@ -33,11 +33,11 @@
       retries: 60
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_addon_manager
       tags: kube_addon_manager
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_flannel
       tags: kube_flannel
