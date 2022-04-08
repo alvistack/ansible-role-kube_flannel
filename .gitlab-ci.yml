@@ -140,10 +140,3 @@ deploy:ansible-galaxy:
   needs:
     - build:kubernetes-1.21
     - build:kubernetes-1.22
-test:centos-9-stream:
-  <<: *job-molecule
-  stage: test
-  variables:
-    _MOLECULE_SCENARIO_NAME: "centos-9-stream"
-  allow_failure: true
-
