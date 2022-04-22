@@ -113,24 +113,144 @@ default:
     - *script-git-submodule
     - *script-symlink-ansible-role
 
-build:kubernetes-1.21:
+build:ubuntu-22.04:
   <<: *job-molecule
   stage: build
   retry: 2
   variables:
-    _MOLECULE_SCENARIO_NAME: "kubernetes-1.21"
+    _MOLECULE_SCENARIO_NAME: "ubuntu-22.04"
 
-build:kubernetes-1.22:
+build:ubuntu-20.04:
   <<: *job-molecule
   stage: build
+  retry: 2
   variables:
-    _MOLECULE_SCENARIO_NAME: "kubernetes-1.22"
+    _MOLECULE_SCENARIO_NAME: "ubuntu-20.04"
 
-test:kubernetes-1.23:
+test:ubuntu-21.10:
   <<: *job-molecule
   stage: test
   variables:
-    _MOLECULE_SCENARIO_NAME: "kubernetes-1.23"
+    _MOLECULE_SCENARIO_NAME: "ubuntu-21.10"
+  allow_failure: true
+
+test:ubuntu-18.04:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "ubuntu-18.04"
+  allow_failure: true
+
+test:centos-9-stream:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "centos-9-stream"
+  allow_failure: true
+
+test:centos-8-stream:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "centos-8-stream"
+  allow_failure: true
+
+test:centos-7:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "centos-7"
+  allow_failure: true
+
+test:opensuse-tumbleweed:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "opensuse-tumbleweed"
+  allow_failure: true
+
+test:opensuse-leap-15.4:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "opensuse-leap-15.4"
+  allow_failure: true
+
+test:opensuse-leap-15.3:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "opensuse-leap-15.3"
+  allow_failure: true
+
+test:debian-testing:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "debian-testing"
+  allow_failure: true
+
+test:debian-11:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "debian-11"
+  allow_failure: true
+
+test:debian-10:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "debian-10"
+  allow_failure: true
+
+test:fedora-rawhide:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "fedora-rawhide"
+  allow_failure: true
+
+test:fedora-36:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "fedora-36"
+  allow_failure: true
+
+test:fedora-35:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "fedora-35"
+  allow_failure: true
+
+test:fedora-34:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "fedora-34"
+  allow_failure: true
+
+test:rhel-9:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "rhel-9"
+  allow_failure: true
+
+test:rhel-8:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "rhel-8"
+  allow_failure: true
+
+test:rhel-7:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "rhel-7"
   allow_failure: true
 
 deploy:ansible-galaxy:
@@ -138,5 +258,5 @@ deploy:ansible-galaxy:
   stage: deploy
   retry: 2
   needs:
-    - build:kubernetes-1.21
-    - build:kubernetes-1.22
+    - build:ubuntu-22.04
+    - build:ubuntu-20.04
