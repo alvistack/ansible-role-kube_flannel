@@ -20,6 +20,6 @@ collections:
     version: ">=0.0.0,<1.0.0"
 
 roles:
-  - name: kube_addon_manager
+  - name: alvistack.kube_addon_manager
     src: https://github.com/alvistack/ansible-role-kube_addon_manager
     version: develop
