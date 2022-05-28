@@ -5,12 +5,6 @@
     git submodule sync --recursive
     git submodule update --init --recursive
 
-.script-symlink-ansible-role: &script-symlink-ansible-role
-  - |
-    export _ROLE="$(echo $CI_PROJECT_NAME | sed 's/^ansible-role-//g')"
-    mkdir -p $HOME/.ansible/roles
-    ln -s $CI_PROJECT_DIR $HOME/.ansible/roles/alvistack.$_ROLE
-
 .script-bootstrap-python: &script-bootstrap-python
   - |
     if ! [[ -x "$(command -v pipx)" ]]; then
@@ -73,10 +67,16 @@
     sh -x -c "vagrant --version"
     sh -x -c "vagrant plugin list"
 
+.script-symlink-ansible-role: &script-symlink-ansible-role
+  - |
+    export _ROLE="$(echo $CI_PROJECT_NAME | sed 's/^ansible-role-//g')"
+    mkdir -p $HOME/.ansible/roles
+    ln -s $CI_PROJECT_DIR $HOME/.ansible/roles/alvistack.$_ROLE
+
 .script-molecule-test: &script-molecule-test
   - |
     export _MOLECULE_INSTANCE_NAME="$(pwgen -1AB 12)"
-    sudo -E molecule test -s $_MOLECULE_SCENARIO_NAME
+    sudo -E molecule test -s $_BOX-$_PROVIDER
 
 .script-ansible-galaxy-role-import: &script-ansible-galaxy-role-import
   - |
@@ -91,16 +91,17 @@
     fi
     ansible-galaxy role import --token $ANSIBLE_GALAXY_TOKEN $_USER $_REPO
 
-.job-molecule: &job-molecule
+.job-molecule-test: &job-molecule-test
   script:
     - *script-bootstrap-python
     - *script-bootstrap-ansible
     - *script-bootstrap-molecule
     - *script-bootstrap-libvirt
     - *script-bootstrap-vagrant
+    - *script-symlink-ansible-role
     - *script-molecule-test
 
-.job-ansible-galaxy: &job-ansible-galaxy
+.job-ansible-galaxy-role-import: &job-ansible-galaxy-role-import
   script:
     - *script-bootstrap-python
     - *script-bootstrap-ansible
@@ -109,30 +110,33 @@
 default:
   before_script:
     - *script-git-submodule
-    - *script-symlink-ansible-role
-
-build:kubernetes-1.22:
-  <<: *job-molecule
-  stage: build
   retry: 2
-  variables:
-    _MOLECULE_SCENARIO_NAME: "kubernetes-1.22"
 
-build:kubernetes-1.23:
-  <<: *job-molecule
+build:kubernetes-1.24-libvirt:
+  <<: *job-molecule-test
   stage: build
-  retry: 2
   variables:
-    _MOLECULE_SCENARIO_NAME: "kubernetes-1.23"
+    _BOX: "kubernetes-1.24"
+    _PROVIDER: "libvirt"
 
-build:kubernetes-1.24:
-  <<: *job-molecule
+build:kubernetes-1.23-libvirt:
+  <<: *job-molecule-test
   stage: build
-  retry: 2
   variables:
-    _MOLECULE_SCENARIO_NAME: "kubernetes-1.24"
+    _BOX: "kubernetes-1.23"
+    _PROVIDER: "libvirt"
+
+build:kubernetes-1.22-libvirt:
+  <<: *job-molecule-test
+  stage: build
+  variables:
+    _BOX: "kubernetes-1.22"
+    _PROVIDER: "libvirt"
 
 deploy:ansible-galaxy:
-  <<: *job-ansible-galaxy
+  <<: *job-ansible-galaxy-role-import
   stage: deploy
-  retry: 2
+  needs:
+    - build:kubernetes-1.24-libvirt
+    - build:kubernetes-1.23-libvirt
+    - build:kubernetes-1.22-libvirt
