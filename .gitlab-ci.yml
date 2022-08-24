@@ -133,17 +133,10 @@ build:kubernetes-1.23-libvirt:
     _BOX: "kubernetes-1.23"
     _PROVIDER: "libvirt"
 
-build:kubernetes-1.22-libvirt:
-  <<: *job-molecule-test
-  stage: build
-  variables:
-    _BOX: "kubernetes-1.22"
-    _PROVIDER: "libvirt"
-
 deploy:ansible-galaxy:
   <<: *job-ansible-galaxy-role-import
   stage: deploy
   needs:
+    - build:kubernetes-1.25-libvirt
     - build:kubernetes-1.24-libvirt
     - build:kubernetes-1.23-libvirt
-    - build:kubernetes-1.22-libvirt
