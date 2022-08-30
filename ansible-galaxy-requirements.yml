@@ -20,6 +20,34 @@ collections:
     version: ">=0.0.0,<1.0.0"
 
 roles:
+  - name: alvistack.cri_o
+    src: https://github.com/alvistack/ansible-role-cri_o
+    version: develop
+
+  - name: alvistack.kube_kubelet
+    src: https://github.com/alvistack/ansible-role-kube_kubelet
+    version: develop
+
+  - name: alvistack.etcd
+    src: https://github.com/alvistack/ansible-role-etcd
+    version: develop
+
+  - name: alvistack.kube_master
+    src: https://github.com/alvistack/ansible-role-kube_master
+    version: develop
+
+  - name: alvistack.kube_node
+    src: https://github.com/alvistack/ansible-role-kube_node
+    version: develop
+
+  - name: alvistack.sonobuoy
+    src: https://github.com/alvistack/ansible-role-sonobuoy
+    version: develop
+
+  - name: alvistack.kube_kubectl
+    src: https://github.com/alvistack/ansible-role-kube_kubectl
+    version: develop
+
   - name: alvistack.kube_addon_manager
     src: https://github.com/alvistack/ansible-role-kube_addon_manager
     version: develop
