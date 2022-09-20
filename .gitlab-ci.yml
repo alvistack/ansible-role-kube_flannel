@@ -140,3 +140,12 @@ deploy:ansible-galaxy:
     - build:kubernetes-1.25-libvirt
     - build:kubernetes-1.24-libvirt
     - build:kubernetes-1.23-libvirt
+test:fedora-37-libvirt:
+  <<: *job-molecule-test
+  stage: test
+  variables:
+    _BOX: "fedora-37"
+    _PROVIDER: "libvirt"
+  allow_failure: true
+  retry: 0
+
