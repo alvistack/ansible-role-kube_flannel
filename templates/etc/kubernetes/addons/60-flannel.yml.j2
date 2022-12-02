@@ -45,6 +45,7 @@ rules:
     resources:
       - nodes
     verbs:
+      - get
       - list
       - watch
   - apiGroups:
@@ -152,7 +153,7 @@ spec:
             - name: cni-plugin
               mountPath: /opt/cni/bin
         - name: install-cni
-          image: docker.io/flannelcni/flannel:v0.20.1
+          image: docker.io/flannelcni/flannel:v0.20.2
           imagePullPolicy: IfNotPresent
           command:
             - cp
@@ -167,7 +168,7 @@ spec:
               mountPath: /etc/kube-flannel
       containers:
         - name: kube-flannel
-          image: docker.io/flannelcni/flannel:v0.20.1
+          image: docker.io/flannelcni/flannel:v0.20.2
           imagePullPolicy: IfNotPresent
           command:
             - /opt/bin/flanneld
