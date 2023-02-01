@@ -54,6 +54,13 @@ rules:
       - nodes/status
     verbs:
       - patch
+  - apiGroups:
+      - "networking.k8s.io"
+    resources:
+      - clustercidrs
+    verbs:
+      - list
+      - watch
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -141,7 +148,7 @@ spec:
       serviceAccountName: flannel
       initContainers:
         - name: install-cni-plugin
-          image: docker.io/flannelcni/flannel-cni-plugin:v1.1.0
+          image: docker.io/flannel/flannel-cni-plugin:v1.1.2-amd64
           imagePullPolicy: IfNotPresent
           command:
             - cp
@@ -153,7 +160,7 @@ spec:
             - name: cni-plugin
               mountPath: /opt/cni/bin
         - name: install-cni
-          image: docker.io/flannelcni/flannel:v0.20.2
+          image: docker.io/flannel/flannel:v0.21.0-amd64
           imagePullPolicy: IfNotPresent
           command:
             - cp
@@ -168,7 +175,7 @@ spec:
               mountPath: /etc/kube-flannel
       containers:
         - name: kube-flannel
-          image: docker.io/flannelcni/flannel:v0.20.2
+          image: docker.io/flannel/flannel:v0.21.0-amd64
           imagePullPolicy: IfNotPresent
           command:
             - /opt/bin/flanneld
@@ -178,9 +185,6 @@ spec:
             - --iface={{ kube_flannel_iface }}
           resources:
             requests:
-              cpu: "100m"
-              memory: "50Mi"
-            limits:
               cpu: "100m"
               memory: "50Mi"
           securityContext:
