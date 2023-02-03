@@ -148,7 +148,7 @@ spec:
       serviceAccountName: flannel
       initContainers:
         - name: install-cni-plugin
-          image: docker.io/flannel/flannel-cni-plugin:v1.1.2-amd64
+          image: docker.io/flannel/flannel-cni-plugin:v1.1.2
           imagePullPolicy: IfNotPresent
           command:
             - cp
@@ -160,7 +160,7 @@ spec:
             - name: cni-plugin
               mountPath: /opt/cni/bin
         - name: install-cni
-          image: docker.io/flannel/flannel:v0.21.0-amd64
+          image: docker.io/flannel/flannel:v0.21.0
           imagePullPolicy: IfNotPresent
           command:
             - cp
@@ -175,7 +175,7 @@ spec:
               mountPath: /etc/kube-flannel
       containers:
         - name: kube-flannel
-          image: docker.io/flannel/flannel:v0.21.0-amd64
+          image: docker.io/flannel/flannel:v0.21.0
           imagePullPolicy: IfNotPresent
           command:
             - /opt/bin/flanneld
