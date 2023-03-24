@@ -144,6 +144,7 @@ deploy:ansible-galaxy:
   <<: *job-ansible-galaxy-role-import
   stage: deploy
   needs:
+    - build:kubernetes-1.27-libvirt
     - build:kubernetes-1.26-libvirt
     - build:kubernetes-1.25-libvirt
     - build:kubernetes-1.24-libvirt
