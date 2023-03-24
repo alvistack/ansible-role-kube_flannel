@@ -112,6 +112,13 @@ default:
     - *script-git-submodule
   retry: 2
 
+build:kubernetes-1.27-libvirt:
+  <<: *job-molecule-test
+  stage: build
+  variables:
+    _BOX: "kubernetes-1.27"
+    _PROVIDER: "libvirt"
+
 build:kubernetes-1.26-libvirt:
   <<: *job-molecule-test
   stage: build
