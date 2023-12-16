@@ -25,8 +25,8 @@ metadata:
     pod-security.kubernetes.io/enforce: privileged
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: flannel
   labels:
@@ -55,7 +55,7 @@ rules:
     verbs:
       - patch
   - apiGroups:
-      - "networking.k8s.io"
+      - networking.k8s.io
     resources:
       - clustercidrs
     verbs:
@@ -63,8 +63,8 @@ rules:
       - watch
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: flannel
   labels:
@@ -92,8 +92,8 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 
 ---
-apiVersion: v1
 kind: ConfigMap
+apiVersion: v1
 metadata:
   name: kube-flannel-cfg
   namespace: kube-flannel
@@ -185,8 +185,8 @@ spec:
             - --iface={{ kube_flannel_iface }}
           resources:
             requests:
-              cpu: "100m"
-              memory: "50Mi"
+              cpu: 100m
+              memory: 50Mi
           securityContext:
             privileged: false
             capabilities:
@@ -207,6 +207,8 @@ spec:
               mountPath: /run/flannel
             - name: flannel-cfg
               mountPath: /etc/kube-flannel
+            - name: xtables-lock
+              mountPath: /run/xtables.lock
       volumes:
         - name: run
           hostPath:
@@ -220,3 +222,7 @@ spec:
         - name: flannel-cfg
           configMap:
             name: kube-flannel-cfg
+        - name: xtables-lock
+          hostPath:
+            path: /run/xtables.lock
+            type: FileOrCreate
