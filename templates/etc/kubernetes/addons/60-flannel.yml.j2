@@ -14,16 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: kube-flannel
-  labels:
-    app.kubernetes.io/name: flannel
-    app.kubernetes.io/part-of: kube-system
-    addonmanager.kubernetes.io/mode: Reconcile
-    pod-security.kubernetes.io/enforce: privileged
-
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
@@ -74,7 +64,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: flannel
-    namespace: kube-flannel
+    namespace: kube-system
 roleRef:
   kind: ClusterRole
   name: flannel
@@ -85,7 +75,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: flannel
-  namespace: kube-flannel
+  namespace: kube-system
   labels:
     app.kubernetes.io/name: flannel
     app.kubernetes.io/part-of: kube-system
@@ -96,7 +86,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: kube-flannel-cfg
-  namespace: kube-flannel
+  namespace: kube-system
   labels:
     app.kubernetes.io/name: flannel
     app.kubernetes.io/part-of: kube-system
@@ -112,7 +102,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: kube-flannel-ds
-  namespace: kube-flannel
+  namespace: kube-system
   labels:
     app.kubernetes.io/name: flannel
     app.kubernetes.io/part-of: kube-system
