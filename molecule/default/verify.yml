@@ -39,7 +39,7 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          kubectl get pod --all-namespaces | egrep -e 'kube-flannel\s+kube-flannel-ds-\S+\s+[0-9]+\/[0-9]+\s+Running'
+          kubectl get pod --all-namespaces | egrep -e 'kube-system\s+kube-system-ds-\S+\s+[0-9]+\/[0-9]+\s+Running'
       args:
         executable: "/bin/bash"
       when: inventory_hostname == ansible_play_hosts[0]
