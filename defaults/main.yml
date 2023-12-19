@@ -23,6 +23,9 @@ kube_flannel_pod_subnet: "10.233.64.0/18"
 # Choose what type of flannel backend to use
 kube_flannel_backend_type: "vxlan"
 
+# Configure the path to the CNI binary directory on the host.
+kube_flannel_cni_binpath: "/opt/cni/bin"
+
 # Flannel cni-conf.json
 kube_flannel_cni_conf:
   name: "cbr0"
