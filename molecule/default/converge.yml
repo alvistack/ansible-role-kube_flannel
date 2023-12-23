@@ -116,3 +116,13 @@
         cmd: kubectl version --output=yaml
       register: result
       changed_when: result is not succeeded
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: alvistack.kube_addon_manager
+      tags: alvistack.kube_addon_manager
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: alvistack.kube_flannel
+      tags: alvistack.kube_flannel
