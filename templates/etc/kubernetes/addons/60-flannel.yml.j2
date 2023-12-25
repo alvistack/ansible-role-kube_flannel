@@ -145,10 +145,10 @@ spec:
           args:
             - -f
             - /flannel
-            - {{ kube_flannel_cni_binpath }}/flannel
+            - /opt/cni/bin/flannel
           volumeMounts:
             - name: cni-plugin
-              mountPath: {{ kube_flannel_cni_binpath }}
+              mountPath: /opt/cni/bin
         - name: install-cni
           image: docker.io/flannel/flannel:v0.24.0
           imagePullPolicy: IfNotPresent
@@ -205,10 +205,10 @@ spec:
             path: /run/flannel
         - name: cni-plugin
           hostPath:
-            path: {{ kube_flannel_cni_binpath }}
+            path: {{ kube_flannel_cni_plugin_dirs }}
         - name: cni
           hostPath:
-            path: /etc/cni/net.d
+            path: {{ kube_flannel_network_config_dir }}
         - name: flannel-cfg
           configMap:
             name: kube-flannel-cfg
