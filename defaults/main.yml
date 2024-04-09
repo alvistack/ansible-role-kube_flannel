@@ -26,6 +26,10 @@ kube_flannel_iface: "{{ ansible_default_ipv4.interface }}"
 # PodSubnet is the subnet used by pods.
 kube_flannel_pod_subnet: 10.233.64.0/18
 
+# (EXPERIMENTAL) If set to true, flannel uses nftables instead of iptables
+# to masquerade the traffic.
+kube_flannel_enable_nftable: false
+
 # Choose what type of flannel backend to use
 kube_flannel_backend_type: vxlan
 
@@ -45,5 +49,6 @@ kube_flannel_cni_conf:
 # Flannel net-conf.json
 kube_flannel_net_conf:
   Network: "{{ kube_flannel_pod_subnet }}"
+  EnableNFTables: "{{ kube_flannel_enable_nftable | bool | lower }}"
   Backend:
     Type: "{{ kube_flannel_backend_type }}"
