@@ -49,6 +49,6 @@ kube_flannel_cni_conf:
 # Flannel net-conf.json
 kube_flannel_net_conf:
   Network: "{{ kube_flannel_pod_subnet }}"
-  EnableNFTables: {{ kube_flannel_enable_nftable | bool | lower }}
+  EnableNFTables: "{{ kube_flannel_enable_nftable | bool }}"
   Backend:
     Type: "{{ kube_flannel_backend_type }}"
