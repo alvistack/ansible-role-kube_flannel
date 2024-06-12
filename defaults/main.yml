@@ -36,7 +36,7 @@ kube_flannel_backend_type: vxlan
 # Flannel cni-conf.json
 kube_flannel_cni_conf:
   name: cbr0
-  cniVersion: "0.3.1"
+  cniVersion: 0.3.1
   plugins:
     - type: flannel
       delegate:
