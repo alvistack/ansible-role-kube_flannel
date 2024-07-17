@@ -142,13 +142,6 @@ build:kubernetes-1.28-libvirt:
     _BOX: kubernetes-1.28
     _PROVIDER: libvirt
 
-build:kubernetes-1.27-libvirt:
-  <<: *job-molecule-test
-  stage: build
-  variables:
-    _BOX: kubernetes-1.27
-    _PROVIDER: libvirt
-
 deploy:ansible-galaxy:
   <<: *job-ansible-galaxy-role-import
   stage: deploy
@@ -156,4 +149,3 @@ deploy:ansible-galaxy:
     - build:kubernetes-1.30-libvirt
     - build:kubernetes-1.29-libvirt
     - build:kubernetes-1.28-libvirt
-    - build:kubernetes-1.27-libvirt
