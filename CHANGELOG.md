@@ -1,6 +1,8 @@
 # Ansible Role for Flannel on Kubernetes
 
-## 11.2.0 - TBC
+## 11.3.0 - TBC
+
+## 11.2.0 - 2025-01-30
 
 - Remove Kubernetes 1.29 support
 - Remove Debian 11 support
